@@ -3,13 +3,15 @@
 
 Simple alternative to [LiteLLM Proxy](https://docs.litellm.ai/docs/simple_proxy). 151 Mo vs 1.8 Go
 
-Forward requests of `/chat/completions` and `/v1/chat/completions` to the 
+Forward requests of `/chat/completions` and `/v1/chat/completions` to the desired model.
+
+It centralizes the API key and can use the model names your want.
 
 ## Usage
 
-Configure `models.yaml` with the list of models/API endpoint/keys. When receiving a request with model `reasoning`
+Configure `models.yaml` with the list of your models/API endpoint/API keys. 
 
-With the following example, it will forward the request to `gemini-2.0-flash-thinking-exp-01-21`  
+With the following example, when receiving a request with model `reasoning`, it will forward the request to `gemini-2.0-flash-thinking-exp-01-21`  
 
 ````yaml
 mistral-small-latest:
