@@ -1,0 +1,19 @@
+mistral-small-latest:
+  api_key: "mykey"
+  endpoint: "https://api.mistral.ai/v1"
+  model_name: "mistral/mistral-small-latest"
+  
+simple:
+  api_key: "mykey"
+  model_name: "gemini/gemini-2.0-flash"
+
+gemini-2.0-pro-exp-02-05:
+  api_key: "mykey"
+  model_name: "gemini/gemini-2.0-pro-exp-02-05"
+
+reasoning:
+  api_key: "mykey"
+  model_name: "gemini/gemini-2.0-flash-thinking-exp-01-21"
+
+default:
+  model_name: "gemini-2.0-flash"

@@ -1,0 +1,14 @@
+services:
+  tinyllm_proxy:
+    container_name: tinyllm_proxy
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models.yaml:/app/models.yaml
+    read_only: true
+    restart: unless-stopped
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges=true
