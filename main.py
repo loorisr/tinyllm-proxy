@@ -30,15 +30,8 @@ with open(CONFIG_FILE, "r") as file:
 if not isinstance(LLM_CONFIGS, dict):
     raise ValueError("YAML file must contain a dictionary of LLM configurations.")
 
-# print(litellm.supports_function_calling(model="mistral/mistral-small-latest"))
-# from litellm import get_supported_openai_params
-# params = get_supported_openai_params(model="mistral/mistral-small-latest")
-# print(params)
-# from litellm import supports_response_schema
-# print(supports_response_schema(model="mistral/mistral-small-latest"))
-
-async def async_generator(completion):
-    async for chunk in completion:                
+async def async_generator(response):
+    async for chunk in response:                
         response_data = {
             "id": chunk.id,
             "object": chunk.object,
@@ -67,17 +60,16 @@ async def completion(request: Request):
     data = await request.json()
     
     if 'stream' in data:
-        if type(data['stream']) == str: 
+        if type(data['stream']) == str: # convert string to boolean
             data['stream'] = data['stream'].lower() == "true"                
        
     if not data['model'] in LLM_CONFIGS:
         data['model'] = LLM_CONFIGS['default']['model_name']
-        print("ok")
-        
+                
     llm_config = LLM_CONFIGS[data['model']]
     data['api_key'] = llm_config.get("api_key")
     data['api_base'] = llm_config.get("endpoint")
-    data['model'] = llm_config.get("model_name")  
+    data['model'] = llm_config.get("model_name") 
     
     print(f"Query to {data['model']}")
             
